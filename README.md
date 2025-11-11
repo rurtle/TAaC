@@ -13,3 +13,10 @@ My attempt at building a compiler from scratch.
 2. `pipreqs` version > `0.4.11` (refer to `requirements.txt`)
 
 ## How to run
+
+
+## Future work
+
+1. [ ] Python based custom compiler targeting x86 platform
+2. [ ] Rust based custom compilier targeting x86 platform
+3. [ ] Rust based custom compiler targeting RISC-V platform
