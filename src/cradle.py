@@ -29,17 +29,25 @@ def report_expected(s):
 
 def match_char(x):
     """Match a specific input character"""
-    pass
+    if look == x:
+        get_char()
+    else:
+        report_expected(f"' {x} '")
 
 
 def is_alpha_char(c):
     """Recognize an alpha character"""
-    pass
+    return c.isalpha()
 
 
 def is_digit_char(c):
     """Recognize a decimal digit"""
-    pass
+    return c.isdigit()
+
+
+def is_addop_char(c):
+    """Recognize an addop character"""
+    return c in ['+', '-']
 
 
 def get_identifier():
