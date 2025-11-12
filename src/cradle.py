@@ -6,25 +6,30 @@ import io
 ## Variable declarations
 look = ''  # Lookahead character
 
+
+## Function declarations
+
+
 def get_char():
     """Read new character from input stream"""
     global look
     look = sys.stdin.read(1)
 
-def report_error(s):
+
+def report_error(x):
     """Report an error"""
-    print(f"Error: {s}")
+    print(f"Error: {x}")
 
 
-def report_abort(s):
+def report_abort(x):
     """Report error and halt"""
-    report_error(s)
+    report_error(x)
     sys.exit(1)
 
 
-def report_expected(s):
+def report_expected(x):
     """Report what was expected"""
-    report_abort(f"{s} Expected")
+    report_abort(f"{x} Expected")
 
 
 def match_char(x):
@@ -35,44 +40,56 @@ def match_char(x):
         report_expected(f"' {x} '")
 
 
-def is_alpha_char(c):
+def is_alpha_char(x):
     """Recognize an alpha character"""
-    return c.isalpha()
+    return x.isalpha()
 
 
-def is_digit_char(c):
+def is_digit_char(x):
     """Recognize a decimal digit"""
-    return c.isdigit()
+    return x.isdigit()
 
 
-def is_addop_char(c):
+def is_addop_char(x):
     """Recognize an addop character"""
-    return c in ['+', '-']
+    return x in ['+', '-']
 
 
 def get_identifier():
     """Get an identifier"""
-    pass
+    if not is_alpha_char(look):
+        report_expected("Name")
+    token = ''
+    while is_alpha_char(look) or is_digit_char(look):
+        token += look
+        get_char()
+    return token.to_upper()
 
 
 def get_number():
     """Get a number"""
-    pass
+    if not is_digit_char(look):
+        report_expected("Number")
+    token = ''
+    while is_digit_char(look):
+        token += look
+        get_char()
+    return token
 
 
 def emit(s):
     """Output a string with tab"""
-    pass
+    print(f"\t{x}")
 
 
 def emit_ln(s):
     """Output a string with tab and CRLF"""
-    pass
+    print(f"\t{x}\n")
 
 
 def initialize():
     """Initialize"""
-    pass
+    get_char()
 
 
 def main():

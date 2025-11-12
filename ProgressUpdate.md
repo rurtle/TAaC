@@ -4,6 +4,10 @@ Here I'll provide daily update on my activity towards this project.
 
 ## Dates
 
+### 12-Nov-2025
+
+1. Finished tutorial 1; implemented the base routines for parsing and reporting
+
 ### 11-Nov-2025
 
 1. Modified some function definitions in `cradle.py`
