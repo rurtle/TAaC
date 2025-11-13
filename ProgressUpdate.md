@@ -4,6 +4,11 @@ Here I'll provide daily update on my activity towards this project.
 
 ## Dates
 
+### 13-Nov-2025
+
+1. Decided to move away from Python as I'm more familier with C and the [reference instructions](https://github.com/lotabout/Let-s-build-a-compiler/) are in C as well
+2. Added simple utility functions and a `Makefile`.
+
 ### 12-Nov-2025
 
 1. Finished tutorial 1; implemented the base routines for parsing and reporting

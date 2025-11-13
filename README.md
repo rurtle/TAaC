@@ -17,6 +17,6 @@ My attempt at building a compiler from scratch.
 
 ## Future work
 
-1. [ ] Python based custom compiler targeting x86 platform
+1. [ ] C based custom compiler targeting x86 platform
 2. [ ] Rust based custom compilier targeting x86 platform
 3. [ ] Rust based custom compiler targeting RISC-V platform
