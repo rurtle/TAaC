@@ -3,12 +3,12 @@
 
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c11 -pedantic
+CFLAGS = -Wall -Wextra -std=c11 -pedantic -I$(SRCDIR)
 DEBUGFLAGS = -g -O0
 RELEASEFLAGS = -O2
 
 # Directories
-SRCDIR = .
+SRCDIR = src
 OBJDIR = obj
 BINDIR = bin
 
@@ -17,9 +17,9 @@ TARGET = cradle
 DEBUGTARGET = cradle_debug
 
 # Source and object files
-SOURCES = cradle.c
+SOURCES = $(SRCDIR)/cradle.c
 OBJECTS = $(SOURCES:.c=.o)
-HEADERS = cradle.h
+HEADERS = $(SRCDIR)/cradle.h
 
 # Default target
 all: $(TARGET)
@@ -45,12 +45,12 @@ run-debug: debug
 # Clean build artifacts
 clean:
 	rm -f $(TARGET) $(DEBUGTARGET) $(OBJECTS)
-	rm -f *.o
+	rm -f *.o $(SRCDIR)/*.o
 	@echo "Clean complete"
 
 # Clean everything including backup files
 distclean: clean
-	rm -f *~ *.bak
+	rm -f *~ *.bak $(SRCDIR)/*~ $(SRCDIR)/*.bak
 	@echo "Distribution clean complete"
 
 # Rebuild from scratch
