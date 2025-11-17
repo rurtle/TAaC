@@ -4,6 +4,12 @@ Here I'll provide daily update on my activity towards this project.
 
 ## Dates
 
+### 17-Nov-2025
+
+1. Introduced `main.c`. Gradually filling it up.
+2. Reorganized codebase - moved all *.c files under `src/` and moved the `Makefile` under project root.
+3. Changed the function return types for a few functions.
+
 ### 13-Nov-2025
 
 1. Decided to move away from Python as I'm more familier with C and the [reference instructions](https://github.com/lotabout/Let-s-build-a-compiler/) are in C as well

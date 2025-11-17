@@ -16,23 +16,43 @@ BINDIR = bin
 TARGET = cradle
 DEBUGTARGET = cradle_debug
 
-# Source and object files
-SOURCES = $(SRCDIR)/cradle.c
-OBJECTS = $(SOURCES:.c=.o)
-HEADERS = $(SRCDIR)/cradle.h
+# Automatically find all source files
+SOURCES = $(wildcard $(SRCDIR)/*.c)
+# Generate object file names from source files
+OBJECTS = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
+# Find all header files
+HEADERS = $(wildcard $(SRCDIR)/*.h)
 
 # Default target
 all: $(TARGET)
 
 # Build release version
-$(TARGET): $(SOURCES) $(HEADERS)
-	$(CC) $(CFLAGS) $(RELEASEFLAGS) -o $(TARGET) $(SOURCES)
+$(TARGET): $(OBJECTS)
+	$(CC) $(CFLAGS) $(RELEASEFLAGS) -o $(TARGET) $(OBJECTS)
 	@echo "Build complete: $(TARGET)"
 
+# Build object files (release)
+$(OBJDIR)/%.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
+	$(CC) $(CFLAGS) $(RELEASEFLAGS) -c $< -o $@
+
+# Create object directory
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+# Generate debug object file names from source files
+DEBUG_OBJECTS = $(SOURCES:$(SRCDIR)/%.c=$(OBJDIR)/%_debug.o)
+
+# Build debug object files
+$(OBJDIR)/%_debug.o: $(SRCDIR)/%.c $(HEADERS) | $(OBJDIR)
+	$(CC) $(CFLAGS) $(DEBUGFLAGS) -c $< -o $@
+
 # Build debug version
-debug: $(SOURCES) $(HEADERS)
-	$(CC) $(CFLAGS) $(DEBUGFLAGS) -o $(DEBUGTARGET) $(SOURCES)
+$(DEBUGTARGET): $(DEBUG_OBJECTS)
+	$(CC) $(CFLAGS) $(DEBUGFLAGS) -o $(DEBUGTARGET) $(DEBUG_OBJECTS)
 	@echo "Debug build complete: $(DEBUGTARGET)"
+
+# Alias for debug target
+debug: $(DEBUGTARGET)
 
 # Run the program
 run: $(TARGET)
@@ -44,7 +64,8 @@ run-debug: debug
 
 # Clean build artifacts
 clean:
-	rm -f $(TARGET) $(DEBUGTARGET) $(OBJECTS)
+	rm -f $(TARGET) $(DEBUGTARGET)
+	rm -rf $(OBJDIR)
 	rm -f *.o $(SRCDIR)/*.o
 	@echo "Clean complete"
 
@@ -58,7 +79,7 @@ rebuild: clean all
 
 # Check for syntax errors without building
 check:
-	$(CC) $(CFLAGS) -fsyntax-only $(SOURCES)
+	$(CC) $(CFLAGS) -fsyntax-only $(SOURCES) $(HEADERS)
 
 # Show help
 help:

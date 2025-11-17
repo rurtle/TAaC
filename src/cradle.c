@@ -8,6 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
 
 #include "cradle.h"
 
@@ -60,23 +61,25 @@ void match_char(char c)
 /**
  * Check if a character is an alpha character
  */
-void is_alpha_char(char c)
+bool is_alpha_char(char c)
 {
-    if (!isalpha(c)) {
-        report_error("Alpha character expected");
-    }
-    printf("Alpha character matched: %c\n", c);
+    return isalpha(c);
 }
 
 /**
  * Check if a character is a digit character
  */
-void is_digit_char(char c)
+bool is_digit_char(char c)
 {
-    if (!isdigit(c)) {
-        report_error("Digit character expected");
-    }
-    printf("Digit character matched: %c\n", c);
+    return isdigit(c);
+}
+
+/**
+ * Check if a character is an addop character
+ */
+bool is_addop_char(char c)
+{
+    return c == '+' || c == '-';
 }
 
 /**
@@ -130,12 +133,4 @@ void emit_ln(const char *s)
 void initialize(void)
 {
     get_char();
-}
-
-/**
- * Main function
- */
-void main(void)
-{
-    initialize();
 }
