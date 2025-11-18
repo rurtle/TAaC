@@ -4,6 +4,10 @@ Here I'll provide daily update on my activity towards this project.
 
 ## Dates
 
+### 18-Nov-2025
+
+1. Updated README with a better resource for the building the compiler.
+
 ### 17-Nov-2025
 
 1. Introduced `main.c`. Gradually filling it up.
